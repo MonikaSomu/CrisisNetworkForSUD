@@ -39,7 +39,7 @@ import java.util.ArrayList;
 public class PatientHomePage extends AppCompatActivity {
 
     private static final Location TODO = null;
-    Button b1, b2, danger, accident;
+    Button b1, emergency;
     private FusedLocationProviderClient client;
     DatabaseHandler myDB;
     private static final int REQUEST_CHECK_CODE = 8989;
@@ -60,20 +60,18 @@ public class PatientHomePage extends AppCompatActivity {
         setContentView(R.layout.activity_patient_home_page);
 
         b1 = findViewById(R.id.button);
-        b2 = findViewById(R.id.button2);
         myDB = new DatabaseHandler(this);
 
-        danger = findViewById(R.id.danger);
-        accident = findViewById(R.id.accident);
+        emergency = findViewById(R.id.emergency);
 
-        //final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.mixkit_retro_emergency_notification_alarm_2970);
+        final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.mixkit_retro_emergency_notification_alarm_2970);
+        //onGPS();
+        //locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        //if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        //    onGPS();
+        //} else {
+        startTrack();
 
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            onGPS();
-        } else {
-            startTrack();
-        }
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,21 +80,8 @@ public class PatientHomePage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                theft();
-            }
-        });
 
-        danger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                danger();
-            }
-        });
-
-        accident.setOnClickListener(new View.OnClickListener() {
+        emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 accident();
@@ -107,20 +92,14 @@ public class PatientHomePage extends AppCompatActivity {
         loadData(101002);
     }
 
-    private void danger() {
-        loadData(100001);
-    }
-
-    private void theft() {
-        loadData(100001);
-    }
 
     private void loadData(int call) {
         ArrayList<String> thelist = new ArrayList<>();
         Cursor data = myDB.getListContents();
         if (data.getCount() == 0) {
             Toast.makeText(PatientHomePage.this, "no content to show", Toast.LENGTH_SHORT).show();
-        } else {
+        }
+         else {
             String msg = "I need Help Latitude : " + x + " Longitude : " + y;
             String number = "";
             while (data.moveToNext()) {
@@ -133,6 +112,7 @@ public class PatientHomePage extends AppCompatActivity {
             }
         }
     }
+
 
     private void sendSMS(String number, String msg, boolean b) {
 
@@ -159,8 +139,8 @@ public class PatientHomePage extends AppCompatActivity {
     }
 
     private void startTrack() {
-        if (ActivityCompat.checkSelfPermission(PatientHomePage.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(PatientHomePage.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(PatientHomePage.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(PatientHomePage.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         } else {
             FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);

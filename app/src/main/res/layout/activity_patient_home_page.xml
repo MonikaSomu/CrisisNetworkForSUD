@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     tools:context=".PatientHomePage">
 
     <RelativeLayout
@@ -39,29 +39,11 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/emergency"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
-            android:text="Emergency Theft"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/danger"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:text="Emergency Danger"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/accident"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:text="Emergency Accident"
+            android:text="Emergency"
             android:textSize="18dp"
             android:textStyle="bold" />
 

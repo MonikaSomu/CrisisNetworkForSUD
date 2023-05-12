@@ -2,13 +2,16 @@ package com.example.crisisnetwork;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
 public class HelperActivity extends AppCompatActivity {
     VideoView vv;
-
+    Button crscomplete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,5 +25,19 @@ public class HelperActivity extends AppCompatActivity {
         vv.setMediaController(med);
         med.setAnchorView(vv);
         vv.start();
-    }
+
+        crscomplete = findViewById(R.id.crs_complete);
+        crscomplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCourseCompleted();
+            }
+        });
+        }
+            public void openCourseCompleted() {
+                Intent intent = new Intent(this, CourseCompleted.class);
+                startActivity(intent);
+            }
+
+
 }
